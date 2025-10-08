@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -19,7 +20,10 @@ public class MainActivity extends AppCompatActivity {
     Button addToListBtn;
     TextView addToListTV;
     EditText addToListItem;
-    RecyclerView itemsList;
+    RecyclerView recyclerView;
+    RVAdapter adapter;
+    ArrayList<String> arrayRV = new ArrayList<>();
+    ArrayList<String> arrayListNames = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,28 +34,19 @@ public class MainActivity extends AppCompatActivity {
         addToListBtn = findViewById(R.id.add_to_list_btn);
         addToListTV = findViewById(R.id.add_to_list_tv);
         addToListItem = findViewById(R.id.add_to_list_item);
-        itemsList = findViewById(R.id.items_list);
+        recyclerView = findViewById(R.id.recyclerView);
 
-        ArrayList test = new ArrayList<>();
-        test.add("a");
+        adapter = new RVAdapter(arrayRV, arrayListNames);
 
-        adapter.notifyItemInserted(test.size() -1);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
-
-//        kotlin
-//
-//        val dataset = arrayOf("January", "February", "March")
-//        val customAdapter = CustomAdapter(dataset)
-//
-//        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//        recyclerView.adapter = customAdapter
-
-
-//        java
-//
-//        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-//        recyclerView.layoutManager = new LinearLayoutManager(this)
-//        recyclerView.setAdapter(customAdapter);
+        //
+        for (int i = 1; i <= 20; i++){
+            arrayRV.add(i + " ");
+            arrayListNames.add("This is item " + i);
+            adapter.notifyDataSetChanged();
+        }
     }
 }
