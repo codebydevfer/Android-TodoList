@@ -53,6 +53,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(itemView.getContext(), arrayListNames.get(getAbsoluteAdapterPosition()), Toast.LENGTH_SHORT).show();
+//                    add delete butotn here
                 }
             });
         }

@@ -1,6 +1,8 @@
 package com.example.todolist;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,17 +38,30 @@ public class MainActivity extends AppCompatActivity {
         addToListItem = findViewById(R.id.add_to_list_item);
         recyclerView = findViewById(R.id.recyclerView);
 
+        addToListTV.setText("What would you like to do?");
+
         adapter = new RVAdapter(arrayRV, arrayListNames);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        //
-        for (int i = 1; i <= 20; i++){
-            arrayRV.add(i + " ");
-            arrayListNames.add("This is item " + i);
-            adapter.notifyDataSetChanged();
-        }
+        addToListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String enteredItem = addToListItem.getText().toString();
+
+                if (!enteredItem.isEmpty()){
+                    int nextNumber = arrayRV.size() + 1;
+
+                    arrayRV.add(nextNumber + ". ");
+                    arrayListNames.add(enteredItem);
+
+                    adapter.notifyDataSetChanged();
+
+                    addToListItem.setText(""); //clear the EditText
+                }
+            }
+        });
     }
 }
