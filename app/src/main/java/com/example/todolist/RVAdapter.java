@@ -3,6 +3,7 @@ package com.example.todolist;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +17,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
     ArrayList<String> arrayRV = new ArrayList<>();
     ArrayList<String> arrayListNames = new ArrayList<>();
 
-    public RVAdapter(ArrayList<String> arrayRV, ArrayList<String> arrayListNames){
+    public RVAdapter(ArrayList<String> arrayRV, ArrayList<String> arrayListNames, Button deleteFromListBtn){ // added this
         this.arrayRV = arrayRV;
         this.arrayListNames = arrayListNames;
 
@@ -43,17 +44,18 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvRV, tvRVName;
+        Button deleteFromListBtn;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
 
             tvRV = itemView.findViewById(R.id.tv_rv);
             tvRVName = itemView.findViewById(R.id.tv_rv_name);
+            deleteFromListBtn = itemView.findViewById(R.id.delete_button);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(itemView.getContext(), arrayListNames.get(getAbsoluteAdapterPosition()), Toast.LENGTH_SHORT).show();
-//                    add delete butotn here
                 }
             });
         }

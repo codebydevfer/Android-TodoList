@@ -30,7 +30,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-    Button addToListBtn;
+    Button addToListBtn, deleteFromListBtn;
     TextView addToListTV;
     EditText addToListItem;
     RecyclerView recyclerView;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         addToListTV.setText("What would you like to do?");
 
-        adapter = new RVAdapter(arrayRV, arrayListNames);
+        adapter = new RVAdapter(arrayRV, arrayListNames, deleteFromListBtn); //added this
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -81,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
                     addToListItem.setText(""); //clear the EditText
 
                 }
+            }
+        });
+        deleteFromListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

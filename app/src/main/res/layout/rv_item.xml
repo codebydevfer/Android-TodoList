@@ -25,4 +25,14 @@
         android:layout_marginBottom="5dp"
         android:text="This is Name 1"
         android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="25sp"
+        android:layout_height="25sp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#ED0D4D"
+        android:text="X" />
 </androidx.cardview.widget.CardView>
