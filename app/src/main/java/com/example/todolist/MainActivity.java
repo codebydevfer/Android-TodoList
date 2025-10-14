@@ -30,7 +30,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-    Button addToListBtn, deleteFromListBtn;
+    Button addToListBtn;
     TextView addToListTV;
     EditText addToListItem;
     RecyclerView recyclerView;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         addToListTV.setText("What would you like to do?");
 
-        adapter = new RVAdapter(arrayRV, arrayListNames, deleteFromListBtn); //added this
+        adapter = new RVAdapter(arrayRV, arrayListNames, this); //added this
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -83,14 +83,9 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        deleteFromListBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
-    private void saveToDataJson(){
+    void saveToDataJson(){
         JSONArray jsonArray = new JSONArray();
         try{
             for (int i = 0; i < arrayListNames.size(); i++){
