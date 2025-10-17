@@ -10,12 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
 import java.util.ArrayList;
 
@@ -59,8 +61,44 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        //drag and drop functionality
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0){
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target){
+                int fromPosistion = viewHolder.getAbsoluteAdapterPosition();
+                int toPosition = target.getAbsoluteAdapterPosition();
+
+                String numberItem = arrayRV.remove(fromPosistion);
+                String nameItem = arrayListNames.remove(fromPosistion);
+
+                arrayRV.add(toPosition, numberItem);
+                arrayListNames.add(toPosition, nameItem);
+
+                adapter.notifyItemMoved(fromPosistion, toPosition);
+                saveToDataJson();
+                return true;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction){
+                //swipe disabled
+            }
+
+            @Override
+            public boolean isLongPressDragEnabled(){
+                return true; //drag by long pressed
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         //saving and loading json
         loadDataFromJson();
+
         adapter.notifyDataSetChanged();
 
         addToListBtn.setOnClickListener(new View.OnClickListener() {
