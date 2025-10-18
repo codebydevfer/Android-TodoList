@@ -33,6 +33,6 @@
         android:layout_marginLeft="150dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="#ED0D4D"
+        android:backgroundTint="#82FF1F"
         android:text="X" />
 </androidx.cardview.widget.CardView>

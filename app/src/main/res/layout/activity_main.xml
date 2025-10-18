@@ -29,6 +29,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#82FF1F"
         app:layout_constraintVertical_bias="0.446" />
 
     <EditText
@@ -58,10 +59,12 @@
         tools:listitem="@layout/rv_item"/>
 
     <Switch
-        android:id="@+id/switch3"
+        android:id="@+id/switch_dark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dark Mode"
+        android:thumbTint="#82FF1F"
+        android:trackTint="#82FF1F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

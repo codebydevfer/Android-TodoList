@@ -1,15 +1,20 @@
 package com.example.todolist;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -33,6 +38,8 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     Button addToListBtn;
+    Switch darkMode;
+    View mainBg;
     TextView addToListTV;
     EditText addToListItem;
     RecyclerView recyclerView;
@@ -49,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         //getting IDs
         addToListBtn = findViewById(R.id.add_to_list_btn);
+        darkMode = findViewById(R.id.switch_dark);
+        mainBg = findViewById(R.id.main);
         addToListTV = findViewById(R.id.add_to_list_tv);
         addToListItem = findViewById(R.id.add_to_list_item);
         recyclerView = findViewById(R.id.recyclerView);
@@ -118,6 +127,30 @@ public class MainActivity extends AppCompatActivity {
 
                     addToListItem.setText(""); //clear the EditText
 
+                }
+            }
+        });
+
+        darkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    //Dark
+                    mainBg.setBackgroundColor(Color.parseColor("#111111"));
+                    addToListBtn.setTextColor(Color.parseColor("#111111"));
+                    darkMode.setTextColor(Color.parseColor("#ffffff"));
+                    addToListTV.setTextColor(Color.parseColor("#ffffff"));
+                    addToListItem.setHintTextColor(Color.parseColor("#ffffff"));
+                    addToListItem.setTextColor(Color.parseColor("#ffffff"));
+                }
+                else {
+                    //Light
+                    mainBg.setBackgroundColor(Color.parseColor("#ffffff"));
+                    addToListBtn.setTextColor(Color.parseColor("#ffffff"));
+                    darkMode.setTextColor(Color.parseColor("#111111"));
+                    addToListTV.setTextColor(Color.parseColor("#111111"));
+                    addToListItem.setHintTextColor(Color.parseColor("#111111"));
+                    addToListItem.setTextColor(Color.parseColor("#111111"));
                 }
             }
         });
